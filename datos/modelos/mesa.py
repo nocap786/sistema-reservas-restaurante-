@@ -1,12 +1,26 @@
+from datos.modelos.cliente import Persona
+
+
 class Mesa:
     def __init__(self, id_mesa, numero, capacidad, caracteristicas):
-        self.id_mesa = id_mesa
-        self.numero = numero
-        self.capacidad = capacidad
-        self.caracteristicas = caracteristicas
+        self._id_mesa = id_mesa
+        self._numero = numero
+        self._capacidad = capacidad
+        self._caracteristicas = caracteristicas
+
+    @property
+    def numero(self):
+        return self._numero
+
+    @property
+    def capacidad(self):
+        return self._capacidad
 
     def mostrar_datos(self):
-        print(f"ID: {self.id_mesa}")
-        print(f"Numero: {self.numero}")
-        print(f"Capacidad: {self.capacidad}")
-        print(f"Caracteristicas: {self.caracteristicas}")
+        print(f"Mesa: {self._numero}")
+        print(f"Capacidad: {self._capacidad}")
+        print(f"Caracteristicas: {self._caracteristicas}")
+
+
+def mostrar_informacion(objeto):
+    objeto.mostrar_datos()

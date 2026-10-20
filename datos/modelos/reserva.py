@@ -1,21 +1,29 @@
 class Reserva:
-    def __init__(self, id_reserva, cliente, mesa, fecha, hora, cantidad_personas, estado="Pendiente"):
-        self.id_reserva = id_reserva
-        self.cliente = cliente
-        self.mesa = mesa
-        self.fecha = fecha
-        self.hora = hora
-        self.cantidad_personas = cantidad_personas
-        self.estado = estado
+    ESTADOS_VALIDOS = ("Pendiente", "Confirmada", "Cancelada", "Completada")
 
-    def mostrar_datos(self):
-        print(f"ID Reserva: {self.id_reserva}")
-        print(f"Cliente: {self.cliente.nombre}")
-        print(f"Mesa: {self.mesa.numero}")
-        print(f"Fecha: {self.fecha}")
-        print(f"Hora: {self.hora}")
-        print(f"Personas: {self.cantidad_personas}")
-        print(f"Estado: {self.estado}")
+    def __init__(self, id_reserva, cliente, mesa, fecha, hora, cantidad_personas, estado="Pendiente"):
+        self._id_reserva = id_reserva
+        self._cliente = cliente
+        self._mesa = mesa
+        self._fecha = fecha
+        self._hora = hora
+        self._cantidad_personas = cantidad_personas
+        self._estado = estado
+
+    @property
+    def estado(self):
+        return self._estado
 
     def cambiar_estado(self, nuevo_estado):
-        self.estado = nuevo_estado
+        if nuevo_estado not in self.ESTADOS_VALIDOS:
+            raise ValueError("Estado de reserva no valido")
+        self._estado = nuevo_estado
+
+    def mostrar_datos(self):
+        print(f"ID Reserva: {self._id_reserva}")
+        print(f"Cliente: {self._cliente.nombre}")
+        print(f"Mesa: {self._mesa.numero}")
+        print(f"Fecha: {self._fecha}")
+        print(f"Hora: {self._hora}")
+        print(f"Personas: {self._cantidad_personas}")
+        print(f"Estado: {self._estado}")
