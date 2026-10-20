@@ -1,13 +1,12 @@
-import os
 import pymysql
-
+from decouple import config
 
 def conectar_bd():
-    conexion = pymysql.connect(
-        host="localhost",
-        user="root",
-        password=os.environ["MYSQL_PASSWORD"],
-        database="restaurante",
+    return pymysql.connect(
+        host=config("host", default="localhost"),
+        port=config("port", default=3306, cast=int),
+        user=config("user"),
+        password=config("password"),
+        database=config("db"),
         charset="utf8mb4"
     )
-    return conexion

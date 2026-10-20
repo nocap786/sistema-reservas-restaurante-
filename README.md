@@ -1,97 +1,114 @@
-Sistema de Reservas de Restaurante
+# Sistema de Reservas de Restaurante
 
-Descripción
+## Descripción
 
-Sistema desarrollado en Python para administrar clientes, mesas y reservas de un restaurante, utilizando programación orientada a objetos (POO) y una base de datos MySQL.
+Sistema de gestión de reservas de restaurante desarrollado en Python, utilizando programación orientada a objetos (POO), arquitectura modular y una base de datos MySQL.
 
-Funcionalidades
+Permite administrar clientes, mesas y reservas mediante una interfaz de consola.
 
-Gestión de clientes
+## Funcionalidades
 
-Registrar clientes.
+### Gestión de clientes
+- Registrar clientes.
+- Consultar clientes.
+- Modificar información de clientes.
+- Eliminar clientes.
 
-Consultar clientes registrados.
+### Gestión de mesas
+- Registrar mesas.
+- Consultar mesas.
+- Modificar mesas.
+- Eliminar mesas.
 
-Modificar información.
+### Gestión de reservas
+- Registrar reservas.
+- Consultar reservas.
+- Modificar reservas.
+- Cancelar reservas.
+- Comprobar la capacidad de las mesas.
+- Comprobar disponibilidad para evitar reservas simultáneas en una misma mesa.
 
-Eliminar clientes.
+## Tecnologías utilizadas
 
-Gestión de mesas
+- Python 3
+- MySQL
+- PyMySQL
+- python-decouple
+- Git y GitHub
 
-Registrar mesas.
+## Estructura del proyecto
 
-Consultar mesas.
+- `datos/modelos/`: clases del sistema.
+- `datos/repositorio/`: operaciones SQL.
+- `datos/conexion/`: conexión con MySQL.
+- `datos/sql/`: scripts SQL.
+- `negocio/`: lógica de gestión de reservas.
+- `presentacion/`: menús de consola.
+- `sistema-reservas.py`: archivo principal.
 
-Modificar sus características.
+## Preparación de MySQL
 
-Eliminar mesas.
+1. Tener instalado y funcionando MySQL Server.
+2. Abrir MySQL Workbench, phpMyAdmin o un cliente de MySQL.
+3. Ejecutar `datos/sql/restaurante.sql` para crear la base de datos `restaurante` y sus tablas.
+4. Ejecutar `datos/sql/crear_usuario.sql` mediante una cuenta con permisos de administración.
 
-Gestión de reservas
+El usuario de la aplicación se denomina `usuario_restaurante` y tiene únicamente los permisos `SELECT`, `INSERT`, `UPDATE` y `DELETE` sobre la base de datos `restaurante`.
 
-Registrar reservas.
+La aplicación no utiliza la cuenta `root` para conectarse.
 
-Consultar reservas.
+## Instalación de dependencias
 
-Modificar fecha, hora y cantidad de personas.
+Abrir una terminal en la carpeta principal del proyecto y ejecutar:
 
-Cancelar reservas.
+```powershell
+python -m pip install pymysql python-decouple
+```
 
-Verificar capacidad y disponibilidad de mesas para el horario solicitado.
+## Configuración de conexión
 
-Tecnologías utilizadas
+1. Copiar el archivo `.env.example`.
+2. Renombrar la copia como `.env`.
+3. Configurar los datos de conexión:
 
-Python
+```ini
+db=restaurante
+host=localhost
+port=3306
+user=usuario_restaurante
+password=RestauranteLocal2026!
+```
 
-MySQL
+La contraseña debe coincidir con la configurada para ese usuario en MySQL.
 
-PyMySQL
+El archivo `.env` contiene credenciales locales y está excluido del repositorio mediante `.gitignore`.
 
-Visual Studio Code
+Cada persona que descargue el proyecto debe configurar su propia conexión local.
 
-Git y GitHub
+## Ejecución del sistema
 
-Organización del proyecto
+Desde la carpeta principal del proyecto ejecutar:
 
-datos/modelos/: clases del sistema.
+```powershell
+python .\sistema-reservas.py
+```
 
-datos/repositorio/: operaciones SQL y acceso a datos.
+Aparecerá el menú principal:
 
-datos/conexion/: conexión a MySQL.
+1. Gestionar clientes.
+2. Gestionar mesas.
+3. Gestionar reservas.
+4. Salir.
 
-datos/sql/: script de creación de la base de datos.
+Para registrar mesas debe existir previamente un restaurante en la tabla `restaurantes`. Para registrar reservas deben existir clientes y mesas.
 
-negocio/: lógica de gestión de reservas.
+## Programación orientada a objetos
 
-presentacion/: menús e interacción con el usuario.
+El proyecto incluye clases como `Cliente`, `Mesa`, `Reserva` y `Restaurante`.
 
-sistema-reservas.py: archivo principal.
+Se implementan conceptos de programación orientada a objetos como herencia, encapsulamiento y polimorfismo.
 
-Instrucciones de ejecución
+## Diagrama UML
 
-Instalar Python y MySQL Server.
+El diagrama UML del sistema se encuentra en la carpeta principal del repositorio.
 
-Crear las tablas ejecutando datos/sql/restaurante.sql en MySQL Workbench.
-
-Instalar la dependencia:
-
-python -m pip install pymysql
-
-Configurar la contraseña de MySQL en la terminal PowerShell:
-
-$env:MYSQL_PASSWORD = Read-Host "Contraseña de MySQL"
-
-Ejecutar el programa desde la carpeta principal:
-
-python sistema-reservas.py
-
-La conexión está configurada para MySQL en localhost, con el usuario root y la base de datos restaurante.
-
-Para registrar mesas debe existir previamente un restaurante en la base de datos. Para registrar reservas deben existir clientes y mesas.
-
-Programación orientada a objetos
-
-El proyecto incluye clases como Cliente, Mesa, Reserva y Restaurante. También incorpora ejemplos de herencia, encapsulamiento y polimorfismo.
-
-Diagrama UML
-
-El diagrama de clases se encuentra en la carpeta principal del repositorio.
