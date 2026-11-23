@@ -27,7 +27,10 @@ MSG_PRIMER_USUARIO = (
     "Cree el primer usuario para poder ingresar."
 )
 MSG_LOGIN_FALLIDO = "Usuario o contraseña incorrectos."
-MSG_LOGIN_BLOQUEADO = "Demasiados intentos fallidos. Cerrando el sistema."
+MSG_LOGIN_INTENTOS = "Le quedan {} intento(s)."
+MSG_LOGIN_BLOQUEADO = (
+    "ACCESO DENEGADO. Demasiados intentos fallidos. Cerrando el sistema."
+)
 MSG_BIENVENIDA = "Bienvenido/a, {}."
 MSG_PASSWORDS_DISTINTAS = "Las contraseñas no coinciden."
 MSG_NOMBRE_USUARIO_INVALIDO = (

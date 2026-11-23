@@ -2,6 +2,7 @@ from auxiliares.info_app import (
     MAX_INTENTOS_LOGIN,
     MSG_BIENVENIDA,
     MSG_LOGIN_BLOQUEADO,
+    MSG_LOGIN_INTENTOS,
     MSG_PASSWORDS_DISTINTAS,
     MSG_PRIMER_USUARIO,
 )
@@ -45,7 +46,7 @@ def iniciar_sesion():
         while not _registrar_usuario():
             pass
 
-    for _ in range(MAX_INTENTOS_LOGIN):
+    for intento in range(1, MAX_INTENTOS_LOGIN + 1):
         print("\n--- INICIO DE SESION ---")
         nombre = pedir_texto("Usuario: ")
         password = pedir_password("Contraseña: ")
@@ -53,7 +54,11 @@ def iniciar_sesion():
         if ok:
             print(MSG_BIENVENIDA.format(usuario.nombre_usuario))
             return usuario
-        print(mensaje)
+        restantes = MAX_INTENTOS_LOGIN - intento
+        if restantes > 0:
+            print(f"{mensaje} {MSG_LOGIN_INTENTOS.format(restantes)}")
+        else:
+            print(mensaje)
 
     print(MSG_LOGIN_BLOQUEADO)
     return None
