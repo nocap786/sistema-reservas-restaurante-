@@ -1,33 +1,20 @@
-class Persona:
-    def __init__(self, nombre, telefono, correo):
-        self._nombre = nombre
-        self._telefono = telefono
-        self._correo = correo
+from peewee import AutoField, CharField
+
+from datos.modelos.models import ModelBase
+
+
+class Cliente(ModelBase):
+    id_cliente = AutoField()
+    nombre = CharField(max_length=100)
+    telefono = CharField(max_length=20, null=True)
+    correo = CharField(max_length=100, null=True)
+
+    class Meta:
+        table_name = "clientes"
 
     def mostrar_datos(self):
-        print(f"Nombre: {self._nombre}")
-        print(f"Telefono: {self._telefono}")
-        print(f"Correo: {self._correo}")
-
-
-class Cliente(Persona):
-    def __init__(self, id_cliente, nombre, telefono, correo):
-        super().__init__(nombre, telefono, correo)
-        self._id_cliente = id_cliente
-
-    def mostrar_datos(self):
-        print(f"ID: {self._id_cliente}")
-        super().mostrar_datos()
-
-    @property
-    def nombre(self):
-        return self._nombre
-
-    @nombre.setter
-    def nombre(self, nuevo_nombre):
-        if not nuevo_nombre.strip():
-            raise ValueError("El nombre no puede estar vacio")
-        self._nombre = nuevo_nombre
-
-
-        
+        print("=== CLIENTE ===")
+        print(f"ID: {self.id_cliente}")
+        print(f"Nombre: {self.nombre}")
+        print(f"Telefono: {self.telefono or '-'}")
+        print(f"Correo: {self.correo or '-'}")

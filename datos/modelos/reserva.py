@@ -1,29 +1,36 @@
-class Reserva:
+from peewee import AutoField, CharField, DateField, ForeignKeyField, IntegerField, TimeField
+
+from datos.modelos.cliente import Cliente
+from datos.modelos.mesa import Mesa
+from datos.modelos.models import ModelBase
+
+
+class Reserva(ModelBase):
     ESTADOS_VALIDOS = ("Pendiente", "Confirmada", "Cancelada", "Completada")
+    ESTADOS_ACTIVOS = ("Pendiente", "Confirmada")
 
-    def __init__(self, id_reserva, cliente, mesa, fecha, hora, cantidad_personas, estado="Pendiente"):
-        self._id_reserva = id_reserva
-        self._cliente = cliente
-        self._mesa = mesa
-        self._fecha = fecha
-        self._hora = hora
-        self._cantidad_personas = cantidad_personas
-        self._estado = estado
+    id_reserva = AutoField()
+    cliente = ForeignKeyField(Cliente, column_name="id_cliente", backref="reservas")
+    mesa = ForeignKeyField(Mesa, column_name="id_mesa", backref="reservas")
+    fecha = DateField()
+    hora = TimeField()
+    cantidad_personas = IntegerField()
+    estado = CharField(max_length=20, default="Pendiente")
 
-    @property
-    def estado(self):
-        return self._estado
+    class Meta:
+        table_name = "reservas"
 
     def cambiar_estado(self, nuevo_estado):
         if nuevo_estado not in self.ESTADOS_VALIDOS:
             raise ValueError("Estado de reserva no valido")
-        self._estado = nuevo_estado
+        self.estado = nuevo_estado
 
     def mostrar_datos(self):
-        print(f"ID Reserva: {self._id_reserva}")
-        print(f"Cliente: {self._cliente.nombre}")
-        print(f"Mesa: {self._mesa.numero}")
-        print(f"Fecha: {self._fecha}")
-        print(f"Hora: {self._hora}")
-        print(f"Personas: {self._cantidad_personas}")
-        print(f"Estado: {self._estado}")
+        print("=== RESERVA ===")
+        print(f"ID Reserva: {self.id_reserva}")
+        print(f"Cliente: {self.cliente.nombre}")
+        print(f"Mesa: {self.mesa.numero}")
+        print(f"Fecha: {self.fecha}")
+        print(f"Hora: {self.hora}")
+        print(f"Personas: {self.cantidad_personas}")
+        print(f"Estado: {self.estado}")

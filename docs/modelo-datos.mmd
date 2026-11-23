@@ -1,0 +1,39 @@
+erDiagram
+    restaurantes ||--o{ mesas : tiene
+    clientes ||--o{ reservas : realiza
+    mesas ||--o{ reservas : "se reserva en"
+    restaurantes {
+        int id_restaurante PK
+        varchar nombre
+        varchar direccion
+        time horario_apertura
+        time horario_cierre
+    }
+    clientes {
+        int id_cliente PK
+        varchar nombre
+        varchar telefono
+        varchar correo
+    }
+    mesas {
+        int id_mesa PK
+        int numero
+        int capacidad
+        varchar caracteristicas
+        int id_restaurante FK
+    }
+    reservas {
+        int id_reserva PK
+        int id_cliente FK
+        int id_mesa FK
+        date fecha
+        time hora
+        int cantidad_personas
+        varchar estado
+    }
+    usuarios {
+        int id_usuario PK
+        varchar nombre_usuario UK
+        varchar password_hash
+        boolean activo
+    }

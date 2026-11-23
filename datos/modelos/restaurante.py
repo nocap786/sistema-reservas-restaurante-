@@ -1,20 +1,24 @@
-class Restaurante:
-    def __init__(self, id_restaurante, nombre, direccion, horario_apertura, horario_cierre):
-        self._id_restaurante = id_restaurante
-        self._nombre = nombre
-        self._direccion = direccion
-        self._horario_apertura = horario_apertura
-        self._horario_cierre = horario_cierre
+from peewee import AutoField, CharField, TimeField
 
-    @property
-    def nombre(self):
-        return self._nombre
+from datos.modelos.models import ModelBase
+
+
+class Restaurante(ModelBase):
+    id_restaurante = AutoField()
+    nombre = CharField(max_length=100)
+    direccion = CharField(max_length=150)
+    horario_apertura = TimeField()
+    horario_cierre = TimeField()
+
+    class Meta:
+        table_name = "restaurantes"
 
     def esta_abierto(self, hora):
-        return self._horario_apertura <= hora < self._horario_cierre
+        return self.horario_apertura <= hora < self.horario_cierre
 
     def mostrar_datos(self):
-        print(f"ID: {self._id_restaurante}")
-        print(f"Nombre: {self._nombre}")
-        print(f"Direccion: {self._direccion}")
-        print(f"Horario: {self._horario_apertura} - {self._horario_cierre}")
+        print("=== RESTAURANTE ===")
+        print(f"ID: {self.id_restaurante}")
+        print(f"Nombre: {self.nombre}")
+        print(f"Direccion: {self.direccion}")
+        print(f"Horario: {self.horario_apertura} - {self.horario_cierre}")

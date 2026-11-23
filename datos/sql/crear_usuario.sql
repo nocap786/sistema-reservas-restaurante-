@@ -1,5 +1,6 @@
+-- Cambie 'tu_contraseña' por la contraseña que dejara en su archivo .env
 CREATE USER IF NOT EXISTS 'usuario_restaurante'@'localhost'
-IDENTIFIED BY 'RestauranteLocal2026!';
+IDENTIFIED BY 'tu_contraseña';
 
 GRANT SELECT, INSERT, UPDATE, DELETE
 ON restaurante.*
