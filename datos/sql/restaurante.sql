@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS restaurante;
+CREATE DATABASE IF NOT EXISTS restaurante
+    CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE restaurante;
 
 CREATE TABLE IF NOT EXISTS restaurantes (
@@ -38,4 +39,12 @@ CREATE TABLE IF NOT EXISTS reservas (
         REFERENCES clientes(id_cliente),
     FOREIGN KEY (id_mesa)
         REFERENCES mesas(id_mesa)
+);
+
+-- Evaluacion 3: usuarios del sistema (la contraseña se guarda como hash BCrypt)
+CREATE TABLE IF NOT EXISTS usuarios (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE
 );

@@ -1,26 +1,25 @@
-from datos.modelos.cliente import Persona
+from peewee import AutoField, CharField, ForeignKeyField, IntegerField
+
+from datos.modelos.models import ModelBase
+from datos.modelos.restaurante import Restaurante
 
 
-class Mesa:
-    def __init__(self, id_mesa, numero, capacidad, caracteristicas):
-        self._id_mesa = id_mesa
-        self._numero = numero
-        self._capacidad = capacidad
-        self._caracteristicas = caracteristicas
+class Mesa(ModelBase):
+    id_mesa = AutoField()
+    numero = IntegerField()
+    capacidad = IntegerField()
+    caracteristicas = CharField(max_length=150, null=True)
+    restaurante = ForeignKeyField(
+        Restaurante, column_name="id_restaurante", backref="mesas"
+    )
 
-    @property
-    def numero(self):
-        return self._numero
-
-    @property
-    def capacidad(self):
-        return self._capacidad
+    class Meta:
+        table_name = "mesas"
 
     def mostrar_datos(self):
-        print(f"Mesa: {self._numero}")
-        print(f"Capacidad: {self._capacidad}")
-        print(f"Caracteristicas: {self._caracteristicas}")
-
-
-def mostrar_informacion(objeto):
-    objeto.mostrar_datos()
+        print("=== MESA ===")
+        print(f"ID: {self.id_mesa}")
+        print(f"Numero: {self.numero}")
+        print(f"Capacidad: {self.capacidad}")
+        print(f"Caracteristicas: {self.caracteristicas or '-'}")
+        print(f"Restaurante: {self.restaurante.nombre}")

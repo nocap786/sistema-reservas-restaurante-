@@ -1,0 +1,55 @@
+classDiagram
+    class ModelBase {
+        <<Peewee Model>>
+        +mostrar_datos()
+    }
+    class Restaurante {
+        +id_restaurante
+        +nombre
+        +direccion
+        +horario_apertura
+        +horario_cierre
+        +esta_abierto(hora)
+        +mostrar_datos()
+    }
+    class Cliente {
+        +id_cliente
+        +nombre
+        +telefono
+        +correo
+        +mostrar_datos()
+    }
+    class Mesa {
+        +id_mesa
+        +numero
+        +capacidad
+        +caracteristicas
+        +restaurante
+        +mostrar_datos()
+    }
+    class Reserva {
+        +id_reserva
+        +cliente
+        +mesa
+        +fecha
+        +hora
+        +cantidad_personas
+        +estado
+        +cambiar_estado(nuevo_estado)
+        +mostrar_datos()
+    }
+    class Usuario {
+        +id_usuario
+        +nombre_usuario
+        +password_hash
+        +activo
+        +mostrar_datos()
+    }
+    ModelBase <|-- Restaurante
+    ModelBase <|-- Cliente
+    ModelBase <|-- Mesa
+    ModelBase <|-- Reserva
+    ModelBase <|-- Usuario
+    Restaurante "1" --> "*" Mesa : tiene
+    Cliente "1" --> "*" Reserva : realiza
+    Mesa "1" --> "*" Reserva : se reserva en
